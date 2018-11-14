@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <meta charset='utf-8' />
+        <title>j5 DEMO</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="https://rawgit.com/dorukeker/gyronorm.js/master/dist/gyronorm.complete.min.js"></script>
+        <script type='text/javascript'>
+            // var Module = {
+            //     preRun: [],
+            //     postRun: [],
+            //     print: (function () {
+            //         return function (text) {
+            //             text = Array.prototype.slice.call(arguments).join(' ');
+            //             console.log(text);
+            //         };
+            //     })(),
+            //     printErr: function (text) {
+            //         text = Array.prototype.slice.call(arguments).join(' ');
+            //         console.error(text);
+            //     }
+            // };
+        </script>
+    </head>
+    <body>
+        <!--<video id='v'></video>	 -->    
+        <!-- <iframe src="http://10.0.0.22:8080/stream/video.mjpeg" frameborder="0" align="left" width="360" height="416" scrolling="no"></iframe> -->
+        <img style="-webkit-user-select: none;" src="http://10.0.0.22:8080/stream/video.mjpeg">
+        <!-- <button id='left' data-control="5">Left</button>
+        <button id='right' data-control="6">Right</button>   
+        <button id='forward' data-control="7">Foward</button>
+        <button id='backward' data-control="8">Backward</button>
+        <button id='start' data-control="9">Start</button>
+        <button id='stop' data-control="10">Stop</button> -->
+    </body>
+    <!--<script async src="cv.js"></script>-->
+    <!--<script src='face-detection.js'></script>-->
+    <script src='test_signalling.js'></script>
+    <script src='test_main.js'></script>
+</html>

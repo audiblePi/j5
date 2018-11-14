@@ -1,0 +1,8 @@
+[Unit]
+Description=Node Server Service
+
+[Service]
+ExecStart=/usr/bin/node /home/pi/server.js
+Restart=always
+
+WantedBy=multi-user.target
