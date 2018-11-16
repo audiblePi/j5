@@ -2,11 +2,11 @@ var express = require('express');
 var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
-//var SerialPort = require('serialport');
+var SerialPort = require('serialport');
 const { exec } = require('child_process');
 
 var port;
-//findSerialPort();
+findSerialPort();
 //app.use(express.static('public'));
 
 app.get('/', function(req, res){
@@ -41,17 +41,17 @@ app.get('/', function(req, res){
 //     res.sendFile(__dirname + '/signalling.js');
 // });
 
-// app.get('/control', function(req, res){
-//     res.sendFile(__dirname + '/control.html');
-//     exec('gpio pwm-ms');
-//     exec('gpio pwmc 192');
-//     exec('gpio pwmr 2000');
-// });
+app.get('/control', function(req, res){
+    res.sendFile(__dirname + '/control.html');
+    exec('gpio pwm-ms');
+    exec('gpio pwmc 192');
+    exec('gpio pwmr 2000');
+});
 
-// app.get('/move/:cmd', function (req, res) {
-//     res.send(req.params.cmd)
-//     command(req.params.cmd)
-// })
+app.get('/move/:cmd', function (req, res) {
+    res.send(req.params.cmd)
+    command(req.params.cmd)
+})
 
 io.on('connection', function(socket){
     console.log('a user connected');
@@ -65,20 +65,20 @@ io.on('connection', function(socket){
         console.log('chat: ' + msg);
     });
 
-    // socket.on('move', function(msg){
-    //     moveCommand(msg);
-    //     console.log('move: ' + msg);
-    // });
+    socket.on('move', function(msg){
+        moveCommand(msg);
+        console.log('move: ' + msg);
+    });
 
-    // socket.on('pan', function(msg){
-    //     pan(msg);
-    //     console.log('pan: ' + msg);
-    // });
+    socket.on('pan', function(msg){
+        pan(msg);
+        console.log('pan: ' + msg);
+    });
 
-    // socket.on('tilt', function(msg){
-    //     tilt(msg);
-    //     console.log('tilt: ' + msg);
-    // });
+    socket.on('tilt', function(msg){
+        tilt(msg);
+        console.log('tilt: ' + msg);
+    });
 
     socket.on('do-alpha', function(msg){
         //handleDO(msg);
@@ -109,13 +109,13 @@ http.listen(3000, function(){
     console.log('listening on *:3000');
 });
 
-// function moveCommand(int){
-//     port.write(int, function(err) {
-//         if (err) {
-//             return console.log('Error on write: ', err.message);
-//         }
-//     });
-// }
+function moveCommand(int){
+    port.write(int, function(err) {
+        if (err) {
+            return console.log('Error on write: ', err.message);
+        }
+    });
+}
 
 function pan(int){
     var command = 'gpio -g pwm 18 ' + int
@@ -132,28 +132,28 @@ function execCallback (error, stdout, stderr) {
         console.error(`exec error: ${error}`);
         return;
     }
-    // console.log(`stdout: ${stdout}`);
-    // console.log(`stderr: ${stderr}`);
+    console.log(`stdout: ${stdout}`);
+    console.log(`stderr: ${stderr}`);
 }
 
-// function findSerialPort(){
-//     var serial = '/dev/ttyACM0';
+function findSerialPort(){
+    var serial = '/dev/ttyACM0';
     
-//     exec('ls /dev/ttyACM*', (error, stdout, stderr) => {
-//         // console.log(`stdout: ${stdout}`);
-//         // console.log(`stderr: ${stderr}`);
+    exec('ls /dev/ttyACM*', (error, stdout, stderr) => {
+        console.log(`stdout: ${stdout}`);
+        console.log(`stderr: ${stderr}`);
 
-//         if (error) {
-//             console.error(`exec error: ${error}`);
-//             return false;
-//         }
-//         else{
-//             var ttyACM = stdout.trim();
-//             port = new SerialPort(ttyACM, {
-//                 baudRate: 9600
-//             });
-//             console.log(`Serial device conected on ${ttyACM}`);
-//             return true
-//         }
-//     });
-// }
+        if (error) {
+            console.error(`exec error: ${error}`);
+            return false;
+        }
+        else{
+            var ttyACM = stdout.trim();
+            port = new SerialPort(ttyACM, {
+                baudRate: 9600
+            });
+            console.log(`Serial device conected on ${ttyACM}`);
+            return true
+        }
+    });
+}

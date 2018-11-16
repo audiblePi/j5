@@ -55,10 +55,10 @@
     var currentAlpha = 0;
     var currentGamma = 0;
 
-    // var left = document.getElementById('left');
-    // var right = document.getElementById('right');
-    // var forward = document.getElementById('forward');
-    // var backward = document.getElementById('backward');
+    var left = document.getElementById('left');
+    var right = document.getElementById('right');
+    var forward = document.getElementById('forward');
+    var backward = document.getElementById('backward');
 
     $('form').submit(function(){
         socket.emit('chat message', $('#m').val());
@@ -102,51 +102,51 @@
 
 
 
-        // window.addEventListener('keydown', function (e){
-        //     console.log(e.which); 
-        //     switch (e.which){
-        //         case 65: //pan left
-        //         console.log("pan left")
-        //         socket.emit('pan', "230");
-        //         break;
-        //         case 68: //pan right
-        //         console.log("pan right")
-        //         socket.emit('pan', "70");
-        //         break;
-        //         case 87: //tilt up
-        //         console.log("tilt up");
-        //         socket.emit('tilt', "130");
-        //         break;
-        //         case 83: //tilt down
-        //         console.log("tilt down");
-        //         socket.emit('tilt', "220");
-        //         break;
-        //         case 37: //left
-        //         console.log("left")
-        //         socket.emit('move', "5");
-        //         break;
-        //         case 39: //right
-        //         console.log("right")
-        //         socket.emit('move', "6");
-        //         break;
-        //         case 38: //up
-        //         console.log("forward");
-        //         socket.emit('move', "7");
-        //         break;
-        //         case 40: //down
-        //         console.log("backward");
-        //         socket.emit('move', "8");
-        //         break;
-        //         case 79: //on - o
-        //         console.log("on");
-        //         socket.emit('move', "9");
-        //         break;
-        //         case 80: //up - p
-        //         console.log("off");
-        //         socket.emit('move', "0");
-        //         break;
-        //     }
-        // }, false);
+        window.addEventListener('keydown', function (e){
+            console.log(e.which); 
+            switch (e.which){
+                case 65: //pan left
+                console.log("pan left")
+                socket.emit('pan', "230");
+                break;
+                case 68: //pan right
+                console.log("pan right")
+                socket.emit('pan', "70");
+                break;
+                case 87: //tilt up
+                console.log("tilt up");
+                socket.emit('tilt', "130");
+                break;
+                case 83: //tilt down
+                console.log("tilt down");
+                socket.emit('tilt', "220");
+                break;
+                case 37: //left
+                console.log("left")
+                socket.emit('move', "5");
+                break;
+                case 39: //right
+                console.log("right")
+                socket.emit('move', "6");
+                break;
+                case 38: //up
+                console.log("forward");
+                socket.emit('move', "7");
+                break;
+                case 40: //down
+                console.log("backward");
+                socket.emit('move', "8");
+                break;
+                case 79: //on - o
+                console.log("on");
+                socket.emit('move', "9");
+                break;
+                case 80: //up - p
+                console.log("off");
+                socket.emit('move', "0");
+                break;
+            }
+        }, false);
 
         // window.addEventListener('keyup', function (e){
         //     //console.log("keyup");
