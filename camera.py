@@ -17,28 +17,17 @@ streamR = "http://172.20.10.11:8080/stream/video.mjpeg"
 capL = cv.VideoCapture()
 capR = cv.VideoCapture()
 fast = cv.FastFeatureDetector_create(40)
-# stereo = cv.StereoSGBM_create(
-# 	minDisparity = 16,
-# 	numDisparities = 16,
-# 	blockSize = 16,
-# 	P1 = 8*3*3**2,
-# 	P2 = 32*3*3**2,
-# 	disp12MaxDiff = 1,
-# 	uniquenessRatio = 10,
-# 	speckleWindowSize = 100,
-# 	speckleRange = 32
-# )
 left_matcher = cv.StereoSGBM_create(
     minDisparity=-16,
     numDisparities=16,      # max_disp has to be dividable by 16 f. E. HH 192, 256       
-    blockSize=5,
+    blockSize=5,			# 16 
     P1=8 * 3 * 3 ** 2,    	# wsize default 3; 5; 7 for SGBM reduced size image; 
 							# 15 for SGBM full size image (1300px and above); 5 Works nicely
     P2=32 * 3 * 3 ** 2,
     disp12MaxDiff=1,
-    uniquenessRatio=15,
-    speckleWindowSize=0,
-    speckleRange=2,
+    uniquenessRatio=15,		# 10
+    speckleWindowSize=0,	# 100
+    speckleRange=2,			# 32 
     preFilterCap=63,
     mode=cv.STEREO_SGBM_MODE_SGBM_3WAY
 )
@@ -184,9 +173,9 @@ def main():
 	    # Display
 	    displayStereo(frameL, frameR, 'Original')
 
-	    #if count % 10 == 0 :
+	    if count % 10 == 0 :
 		    #Generate 3D Point Cloud
-		    #generatePointCloud(frameL, D)
+		    generatePointCloud(frameL, D)
 
 	    if cv.waitKey(1) & 0xFF == ord('q'):
 	        break
